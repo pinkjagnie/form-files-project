@@ -42,6 +42,12 @@
   border-color: #656565;
 }
 
+.control span {
+  padding-left: 6rem;
+  font-weight: bold;
+  color: lightcoral
+}
+
 .form button {
   display: block;
   width: 50%;
