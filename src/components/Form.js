@@ -1,5 +1,7 @@
 import { useForm } from "react-hook-form";
 
+import styles from "../style";
+
 const Form = ({ theme }) => {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
@@ -11,32 +13,35 @@ const Form = ({ theme }) => {
 
   // console.log(enteredName, enteredFile, enteredEmail)
 
+  const textColor = theme === "dark" ? styles.darkColor : styles.lightColor;
+  const inputBg = theme === "dark" ? styles.darkInputBg : styles.lightInputBg;
+
   return (
-    <section className={`p-8 w-screen h-screen ${theme === "dark" ? "bg-[#221f23]" : "bg-[#ccc]"}`}>
-      <p className={`pb-6 mt-4 font-bold text-center ${theme === "dark" ? "text-[whitesmoke]" : "text-[#1f2b37]"}`}>Use the form below to upload your file</p>
+    <section className={`p-8 w-screen h-screen ${theme === "dark" ? styles.darkMain : styles.lightMain}`}>
+      <p className={`pb-6 mt-4 font-bold text-center text-xl ${textColor}`}>Use the form below to upload your file</p>
 
-      <form className={`w-[60%] p-6 pb-8 my-0 mx-[auto] border ${theme === "dark" ? "border-[whitesmoke]" : "border-[#221f23]"} rounded-[20px] ${theme === "dark" ? "bg-[#1f2b37]" : "bg-[#656565]"}`} onSubmit={handleSubmit(onSubmit)}>
+      <form className={`w-[60%] p-6 pb-8 my-0 mx-[auto] border-gray-800 shadow-lg shadow-black/40 ${theme === "dark" ? styles.darkForm : styles.lightForm} rounded-[20px]`} onSubmit={handleSubmit(onSubmit)}>
 
         <div className="pb-6">
-          <label htmlFor="name" className={`block font-bold ml-6 mt-4 mr-2 mb-2 ${theme === "dark" ? "text-[whitesmoke]" : "text-black"}`}>Your name</label>
-          <input type="text" id="name" {...register("nameRequired", { required: true })} className="block w-[95%] mx-2 my-[auto] p-2 border border-[#ccc] rounded-[10px] focus:outline-none focus:border-[#656565]"/>
-          {errors.nameRequired && <span className="pl-24 font-bold text-[lightcoral]">This field is required</span>}
+          <label htmlFor="name" className={`${styles.label} ${textColor}`}>Your name</label>
+          <input type="text" id="name" {...register("nameRequired", { required: true })} className={`${styles.input} ${inputBg}`}/>
+          {errors.nameRequired && <span className={styles.span}>This field is required</span>}
         </div>
 
         <div className="pb-6">
-          <label htmlFor="email" className={`block font-bold ml-6 mt-2 mr-2 mb-2 ${theme === "dark" ? "text-[whitesmoke]" : "text-black"}`}>Your email</label>
-          <input type="email" id="email" {...register("emailRequired", { required: true })} className="block w-[95%] mx-2 my-[auto] p-2 border border-[#ccc] rounded-[10px] focus:outline-none focus:border-[#656565]"/>
-          {errors.emailRequired && <span className="pl-24 font-bold text-[lightcoral]">This field is required</span>}
+          <label htmlFor="email" className={`${styles.label} ${textColor}`}>Your email</label>
+          <input type="email" id="email" {...register("emailRequired", { required: true })} className={`${styles.input} ${inputBg}`}/>
+          {errors.emailRequired && <span className={styles.span}>This field is required</span>}
         </div>
 
         <div className="pb-6">
-          <label htmlFor="file" className={`block font-bold ml-6 mt-2 mr-2 mb-2 ${theme === "dark" ? "text-[whitesmoke]" : "text-black"}`}>Upload your file</label>
-          <input type="file" id="file" {...register("fileRequired", { required: true })} className="block w-[95%] mx-2 my-[auto] p-2 border border-[#ccc] rounded-[10px] focus:outline-none focus:border-[#656565]"/>
-          {errors.fileRequired && <span className="pl-24 font-bold text-[lightcoral]">This field is required</span>}
+          <label htmlFor="file" className={`${styles.label} ${textColor}`}>Upload your file</label>
+          <input type="file" id="file" {...register("fileRequired", { required: true })} className={`${styles.input} ${inputBg}`}/>
+          {errors.fileRequired && <span className={styles.span}>This field is required</span>}
         </div>
 
         <div className="flex justify-center">
-          <button className={`block w-[50%] ml-5 mr-0 my-[auto] py-2 px-8 border border-[whitesmoke] rounded-[25px] ${theme === "dark" ? "bg-[#656565]" : "bg-[#1f2b37]"} text-[whitesmoke] text-xl font-bold hover:bg-[darkolivegreen]`}>Submit</button>
+          <button className={`block w-[50%] ml-5 mr-0 my-[auto] py-2 px-8 border border-[whitesmoke] rounded-[25px] text-[whitesmoke] ${styles.buttonBg}`}>Submit</button>
         </div>
       
       </form>
